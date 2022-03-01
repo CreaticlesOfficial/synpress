@@ -36,14 +36,19 @@ module.exports = {
     return true;
   },
   assignWindows: async () => {
-    let pages = await puppeteerBrowser.pages();
-    for (const page of pages) {
-      if (page.url().includes('integration')) {
-        mainWindow = page;
-      } else if (page.url().includes('tests')) {
-        mainWindow = page;
-      } else if (page.url().includes('extension')) {
-        metamaskWindow = page;
+    var metamaskFound = false;
+    while (!metamaskFound) {
+      console.log("Looking for metamask page...");
+      let pages = await puppeteerBrowser.pages();
+      for (const page of pages) {
+        if (page.url().includes('integration')) {
+          mainWindow = page;
+        } else if (page.url().includes('tests')) {
+          mainWindow = page;
+        } else if (page.url().includes('extension')) {
+          metamaskWindow = page;
+          metamaskFound = true;
+        }
       }
     }
     return true;
