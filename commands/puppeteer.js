@@ -39,7 +39,7 @@ module.exports = {
     var metamaskFound = false;
     for (var i = 0; i < 10 && !metamaskFound; i++) {
       console.log("Looking for metamask page...");
-      await new Promise(r => setTimeout(r, 100));
+      await new Promise(r => setTimeout(r, 1000));
       let pages = await puppeteerBrowser.pages();
       for (const page of pages) {
         if (page.url().includes('integration')) {
